@@ -78,7 +78,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 
 		dump_count = 0
 
-		def remove_emojis(data):
+		def clean_data(data):
 			emoj = re.compile("["
 						u"\U0001F600-\U0001F64F"  # emoticons
 						u"\U0001F300-\U0001F5FF"  # symbols & pictographs
@@ -99,8 +99,17 @@ if (url.startswith('https://www.linkedin.com/company/')):
 						u"\ufe0f"  # dingbats
 						u"\u3030"
 													"]+", re.UNICODE)
-			# remove trailing space, emojis and diacritics
-			return unidecode.unidecode(re.sub(emoj, '', data).rstrip())
+			
+			# remove emojis
+			cleaned = re.sub(emoj, '', data).strip()
+			# convert german umlauts before removing diacritics
+			cleaned = cleaned.replace('Ü','Ue').replace('Ä','Ae').replace('Ö', 'Oe').replace('ü', 'ue').replace('ä', 'ae').replace('ö', 'oe')
+			# convert semicolon to colon to prevent CSV breaking
+			cleaned = cleaned.replace(',', '')
+			cleaned = cleaned.replace(';', ',')
+			# remove diacritics
+			cleaned = unidecode.unidecode(cleaned)
+			return cleaned.strip()
 
 		def progressbar(it, prefix="", size=60, out=sys.stdout): # Python3.3+
 				count = len(it)
@@ -141,7 +150,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 
 			for employee in results:
 				# get a user's full account name and remove some known abbreviations and salutations
-				account_name = remove_emojis(employee["title"]["text"]).split(" ")
+				account_name = clean_data(employee["title"]["text"]).split(" ")
 				badwords = ['Prof.', 'Dr.', 'M.A.', ',', 'LL.M.']
 				for word in list(account_name):
 					if word in badwords:
@@ -149,17 +158,17 @@ if (url.startswith('https://www.linkedin.com/company/')):
 
 				# if the account name consists of 2 strings, assume firstname and lastname
 				if len(account_name) == 2:
-					firstname = account_name[0].replace(',', '').replace(';', ',')
-					lastname = account_name[1].replace(',', '').replace(';', ',')
+					firstname = account_name[0]
+					lastname = account_name[1]
 				# otherwise it is some unknown format with saluation, or middle name or random abbreviations
 				else:
 					# combine everything up to last string into firstname
-					firstname = ' '.join(map(str,account_name[0:(len(account_name)-1)])).replace(',', '').replace(';', ',')
+					firstname = ' '.join(map(str,account_name[0:(len(account_name)-1)]))
 					# use the last string as lastname
-					lastname = account_name[-1].replace(',', '').replace(';', ',')
+					lastname = account_name[-1]
 				
 				try:
-					position = remove_emojis(employee["primarySubtitle"]["text"]).replace(';',',')
+					position = clean_data(employee["primarySubtitle"]["text"])
 				except:
 					position = "N/A"
 				gender = "N/A"
@@ -173,11 +182,11 @@ if (url.startswith('https://www.linkedin.com/company/')):
 				profile_link = employee["navigationUrl"].split("?")[0]
 
 				if args.include_private_profiles:
-					employee_dict.append({"firstname":remove_emojis(firstname), "lastname":remove_emojis(lastname), "position":remove_emojis(position), "gender":gender, "location":location, "profile_link":profile_link})
+					employee_dict.append({"firstname":firstname, "lastname":lastname, "position":position, "gender":gender, "location":location, "profile_link":profile_link})
 					dump_count += 1
 				else:
 					if (firstname != "LinkedIn" and lastname != "Member"):
-						employee_dict.append({"firstname":remove_emojis(firstname), "lastname":remove_emojis(lastname), "position":remove_emojis(position), "gender":gender, "location":location, "profile_link":profile_link})
+						employee_dict.append({"firstname":firstname, "lastname":lastname, "position":position, "gender":gender, "location":location, "profile_link":profile_link})
 						dump_count += 1
 
 		# remove duplicates from list in dict
