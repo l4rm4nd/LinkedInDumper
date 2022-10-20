@@ -60,7 +60,7 @@ The script will return employee data as semi-colon separated values (like CSV):
 
 Firstname;Lastname;Position;Gender;Location;Profile
 Katrin;Honauer;Software Engineer at Apple;N/A;Heidelberg;https://www.linkedin.com/in/katrin-honauer
-Raymond;Chen;Recruiting at Apple ;N/A;Austin, Texas Metropolitan Area;https://www.linkedin.com/in/raytherecruiter
+Raymond;Chen;Recruiting at Apple;N/A;Austin, Texas Metropolitan Area;https://www.linkedin.com/in/raytherecruiter
 Denny;Brem;System Engineer bei Apple;N/A;Greater Munich Metropolitan Area;https://www.linkedin.com/in/denny-brem
 
 [i] Successfully crawled 3 unique apple employee(s). Hurray ^_-
