@@ -1,8 +1,4 @@
 requests
-json
 argparse
 datetime
-re
-sys
-time
 unidecode
