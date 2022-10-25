@@ -1,15 +1,15 @@
 # LinkedInDumper
 Python 3 script to dump company employees from LinkedIn Voyager API.
 
-The results contain firstname, lastname, position (title), location and a user's profile link. Only 2 API calls are required to retrieve all employees if the company does not have more than 10 employees. Otherwise, we have to paginate through the API results. The API returns a maximum of 1000 employees.
+The results contain firstname, lastname, position (title), location and a user's profile link. Only 2 API calls are required to retrieve all employees if the company does not have more than 10 employees. Otherwise, we have to paginate through the API results. 
 
 ## Limitations
 
-LinkedIn will allow only the first 1,000 search results to be returned when harvesting contact information. However, the same results are not returned each time a series of searches are applied. Run the script multiple times to capture more contacts. Moreover, the amount of allowed profile searches is limited. You may need a LinkedIn premium account when you reached the maximum allowed queries.
+LinkedIn will allow only the first 1,000 search results to be returned when harvesting contact information. You may also need a LinkedIn premium account when you reached the maximum allowed queries for visiting profiles with your freemium LinkedIn account.
 
 Furthermore, not all employee profiles are public. The results vary depending on your used LinkedIn account and whether you are befriended with some employees of the company to crawl or not. Therefore, it is sometimes not possible to retrieve the firstname, lastname and profile url of some employee accounts. The script will not display such profiles, as they contain default values such as "LinkedIn" as firstname and "Member" in the lastname. If you want to include such private profiles, please use the CLI flag ``--include-private-profiles``. Although some accounts may be private, we can obtain the position (title) as well as the location of such accounts. Only firstname, lastname and profile URL are hidden for private LinkedIn accounts.
 
-Finally, LinkedIn users are free to name their profile. An account name can therefore consist of various things such as saluations, abbreviations, emojis, middle names etc. I tried my best to remove some nonsense. However, this is not a complete solution to the general problem.
+Finally, LinkedIn users are free to name their profile. An account name can therefore consist of various things such as saluations, abbreviations, emojis, middle names etc. I tried my best to remove some nonsense. However, this is not a complete solution to the general problem. Note that we are not using the official LinkedIn API. This script gathers information from the "unofficial" Voyager API.
  
 ## How-To
 1. Sign into www.linkedin.com and retrieve your ``li_at`` session cookie value e.g. via developer tools. I recommend not using your real LinkedIn account.
@@ -35,7 +35,6 @@ options:
 ````
 docker run --rm l4rm4nd/linkedindumper:latest --url <linkedin-url> --cookie <cookie>
 ````
-
 
 ## Examples
 
