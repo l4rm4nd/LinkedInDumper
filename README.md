@@ -13,7 +13,7 @@ Finally, LinkedIn users are free to name their profile. An account name can ther
  
 ## How-To
 1. Sign into www.linkedin.com and retrieve your ``li_at`` session cookie value e.g. via developer tools. I recommend not using your real LinkedIn account.
-2. Specify the cookie value either persistently in the python script's variable ``li_at`` or temporarily via the CLI flag ``--session-cookie``
+2. Specify the cookie value either persistently in the python script's variable ``li_at`` or temporarily via the CLI flag ``--cookie``
 3. Browse your company on LinkedIn and note the url. Must be something like https://www.linkedin.com/company/apple
 4. Install requirements via ``pip install -r requirements.txt``
 5. Run the Python script and enjoy results
