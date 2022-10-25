@@ -20,7 +20,7 @@ Finally, LinkedIn users are free to name their profile. An account name can ther
 
 ## Usage
 ````
-usage: linkedindumper.py [-h] --url <linkedin-url> [--session-cookie <cookie>] [--quiet] [--include-private-profiles]
+usage: linkedindumper.py [-h] --url <linkedin-url> [--cookie <cookie>] [--quiet] [--include-private-profiles]
 
 options:
   -h, --help                    show this help message and exit
