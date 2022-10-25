@@ -25,7 +25,7 @@ usage: linkedindumper.py [-h] --url <linkedin-url> [--session-cookie <cookie>] [
 options:
   -h, --help                    show this help message and exit
   --url <linkedin-url>          A LinkedIn company url - https://www.linkedin.com/company/<company>
-  --session-cookie <cookie>     LinkedIn 'li_at' session cookie
+  --cookie <cookie>             LinkedIn 'li_at' session cookie
   --quiet                       Show employee results only
   --include-private-profiles    Show private accounts too
 ````
@@ -33,7 +33,7 @@ options:
 ## Docker Run Examples
 
 ````
-docker run --rm l4rm4nd/linkedindumper:latest --url <linkedin-url> --session-cookie <cookie>
+docker run --rm l4rm4nd/linkedindumper:latest --url <linkedin-url> --cookie <cookie>
 ````
 
 
