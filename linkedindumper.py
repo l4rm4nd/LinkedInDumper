@@ -12,7 +12,7 @@ li_at = "<SESSION-COOKIE>"
 
 parser = argparse.ArgumentParser("linkedindumper.py")
 parser.add_argument("--url", metavar='<linkedin-url>', help="A LinkedIn company url - https://www.linkedin.com/company/<company>", type=str, required=True)
-parser.add_argument("--session-cookie", metavar='<cookie>', help="LinkedIn 'li_at' session cookie", type=str, required=False,)
+parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' session cookie", type=str, required=False,)
 parser.add_argument("--quiet", help="Show employee results only", required=False, action='store_true')
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
 
@@ -23,8 +23,8 @@ url = args.url
 JSESSIONID = "ajax:1337133713371337"
 
 # overwrite varibales if set via CLI
-if (args.session_cookie):
-	li_at = args.session_cookie
+if (args.cookie):
+	li_at = args.cookie
 
 headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Content-type': 'application/json', 'Csrf-Token': JSESSIONID}
 cookies_dict = {"li_at": li_at, "JSESSIONID": JSESSIONID} 
