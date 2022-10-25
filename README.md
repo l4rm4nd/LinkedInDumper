@@ -30,6 +30,13 @@ options:
   --include-private-profiles    Show private accounts too
 ````
 
+## Docker Run Examples
+
+````
+docker run --rm l4rm4nd/linkedindumper:latest --url <linkedin-url> --session-cookie <cookie>
+````
+
+
 ## Examples
 
 Dumping Apple employees from LinkedIn API into outfile using `--quiet` mode:
