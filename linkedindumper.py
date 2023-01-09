@@ -36,8 +36,8 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		before_keyword, keyword, after_keyword = url.partition('company/')
 		company = after_keyword.split('/')[0]
 		
-		# retrieve company urn from the api; e.g. "urn:li:fsd_company:42848399"
-		companyID = response1["elements"][0]["entityUrn"].split(":")[-1]
+		# url encode potential special chars that will brick the api lookup
+		company = urllib.parse.quote(company)
 		
 		api1 = "https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies?decorationId=com.linkedin.voyager.dash.deco.organization.MiniCompany-10&q=universalName&universalName=" + str(company)
 		# request to query a company's urn ID
