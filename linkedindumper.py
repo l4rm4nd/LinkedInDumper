@@ -6,6 +6,7 @@ import sys
 import time
 import unidecode
 from datetime import datetime
+import urllib.parse
 
 # mandatory authenticated session cookie
 li_at = "<SESSION-COOKIE>"
@@ -34,7 +35,10 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		# extract company slug from given LinkedIn URL
 		before_keyword, keyword, after_keyword = url.partition('company/')
 		company = after_keyword.split('/')[0]
-
+		
+		# retrieve company urn from the api; e.g. "urn:li:fsd_company:42848399"
+		companyID = response1["elements"][0]["entityUrn"].split(":")[-1]
+		
 		api1 = "https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies?decorationId=com.linkedin.voyager.dash.deco.organization.MiniCompany-10&q=universalName&universalName=" + str(company)
 		# request to query a company's urn ID
 		r = requests.get(api1, headers=headers, cookies=cookies_dict)
