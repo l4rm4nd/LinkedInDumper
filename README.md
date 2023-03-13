@@ -63,6 +63,9 @@ docker run --rm l4rm4nd/linkedindumper:latest --url 'https://www.linkedin.com/co
 ### 🐍 Example 2 - Native Python
 
 ````
+# install dependencies
+pip install -r requirements.txt
+
 python3 linkedindumper.py --url 'https://www.linkedin.com/company/apple' --cookie <cookie> --email-format '{0}.{1}@apple.de'
 ````
 
