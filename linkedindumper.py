@@ -11,7 +11,7 @@ import urllib.parse
 import textwrap
 
 # mandatory authenticated session cookie
-li_at = "AQEDAScD8v8Fe0dPAAABhHXoAdQAAAGGekee1E0AC7B-2_ReeI7-2kktI86_on_PE0FrKQDrbm3A_KlSkYJdzMkiRgEb0JB__2SoXOpPFIADecEva2hnyk7Yf2KIgVZTpUJuzKETnKZ0mp6zIpPx79TU"
+li_at = "YOUR-COOKIE-VALUE"
 
 # converting german umlauts
 special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
@@ -36,7 +36,7 @@ args = parser.parse_args()
 url = args.url
 
 # optional CSRF token, not needed for GET requests but still defined to be sure
-JSESSIONID = "ajax:1337133713371337"
+JSESSIONID = "ajax:5739908118104050450"
 
 # overwrite varibales if set via CLI
 if (args.cookie):
@@ -48,20 +48,23 @@ else:
 	mailformat = False
 
 headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Content-type': 'application/json', 'Csrf-Token': JSESSIONID}
-cookies_dict = {"li_at": li_at, "JSESSIONID": JSESSIONID} 
+cookies_dict = {"li_at": li_at, "JSESSIONID": JSESSIONID}
+http_proxy  = "http://127.0.0.1:8080"
+
+proxies = {"http"  : http_proxy}
 
 if (url.startswith('https://www.linkedin.com/company/')):
 	try:
 		# extract company slug from given LinkedIn URL
 		before_keyword, keyword, after_keyword = url.partition('company/')
 		company = after_keyword.split('/')[0]
-		
+
 		# url encode potential special chars that will brick the api lookup
 		company = urllib.parse.quote(company)
-		
+
 		api1 = "https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies?decorationId=com.linkedin.voyager.dash.deco.organization.MiniCompany-10&q=universalName&universalName=" + str(company)
 		# request to query a company's urn ID
-		r = requests.get(api1, headers=headers, cookies=cookies_dict)
+		r = requests.get(api1, headers=headers, cookies=cookies_dict, proxies=proxies)
 		response1 = r.json()
 
 		# retrieve company urn from the api; e.g. "urn:li:fsd_company:42848399"
@@ -72,7 +75,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 
 		api2 = "https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List(" + str(companyID) + "),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count=" + str(paging_count)+ "&start=0"
 		# retrieve employee information from the api based on previously obtained company id
-		r2 = requests.get(api2, headers=headers, cookies=cookies_dict)
+		r2 = requests.get(api2, headers=headers, cookies=cookies_dict, proxies=proxies)
 		response2 = r2.json()
 
 		paging_total = response2["paging"]["total"]
@@ -154,29 +157,30 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		for page in progressbar(range(required_pagings), "Progress: ", 40):
 			api2 = "https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List(" + str(companyID) + "),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count=" + str(paging_count)+ "&start=" + str(page*10)
 			# retrieve employee information from the api based on previously obtained company id
-			r2 = requests.get(api2, headers=headers, cookies=cookies_dict)
+			r2 = requests.get(api2, headers=headers, cookies=cookies_dict, proxies=proxies)
 			response2 = r2.json()
+
 			try:
-				test = response2["elements"][0]["results"][0]["title"]["text"]
-				results = response2["elements"][0]["results"]
+				test = response2["elements"][0]["items"][0]['itemUnion']['entityResult']['title']['text']
+				results = response2["elements"][0]["items"]
 			except:
 				pass
 
 			try:
-				test = response2["elements"][1]["results"][0]["title"]["text"]
-				results = response2["elements"][1]["results"]
+				test = response2["elements"][1]["items"][0]['itemUnion']['entityResult']['title']['text']
+				results = response2["elements"][1]["items"]
 			except:
 				pass
 
 			try:
-				test = response2["elements"][2]["results"][0]["title"]["text"]
-				results = response2["elements"][2]["results"]
+				test = response2["elements"][2]["items"][0]['itemUnion']['entityResult']['title']['text']
+				results = response2["elements"][2]["items"]
 			except:
 				pass
 
 			for employee in results:
 				# get a user's full account name and remove some known abbreviations and salutations
-				account_name = clean_data(employee["title"]["text"]).split(" ")
+				account_name = clean_data(employee["itemUnion"]['entityResult']["title"]["text"]).split(" ")
 				badwords = ['Prof.', 'Dr.', 'M.A.', ',', 'LL.M.']
 				for word in list(account_name):
 					if word in badwords:
@@ -192,20 +196,20 @@ if (url.startswith('https://www.linkedin.com/company/')):
 					firstname = ' '.join(map(str,account_name[0:(len(account_name)-1)]))
 					# use the last string as lastname
 					lastname = account_name[-1]
-				
+
 				try:
-					position = clean_data(employee["primarySubtitle"]["text"])
+					position = clean_data(employee["itemUnion"]['entityResult']["primarySubtitle"]["text"])
 				except:
 					position = "N/A"
 				gender = "N/A"
-				
+
 				# an account's location is sometimes unaccessible
 				try:
-					location = employee["secondarySubtitle"]["text"]
+					location = employee["itemUnion"]['entityResult']["secondarySubtitle"]["text"]
 				except:
 					location = "N/A"
-				
-				profile_link = employee["navigationUrl"].split("?")[0]
+
+				profile_link = employee["itemUnion"]['entityResult']["navigationUrl"].split("?")[0]
 
 				if args.include_private_profiles:
 					employee_dict.append({"firstname":firstname, "lastname":lastname, "position":position, "gender":gender, "location":location, "profile_link":profile_link})
@@ -232,7 +236,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 			legende = "Firstname;Lastname;Email;Position;Gender;Location;Profile"
 		else:
 			legende = "Firstname;Lastname;Position;Gender;Location;Profile"
-		
+
 		print(legende)
 
 		# dump all crawled employees
@@ -245,7 +249,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		if not args.quiet:
 			print()
 			print("[i] Successfully crawled " + str(len(employee_dict)) + " unique " + str(company) + " employee(s). Hurray ^_-")
-	
+
 	except Exception as e:
 		# likely authorization error due to incorrect 'login' cookie
 		# otherwise the script is broken or the api has been changed
