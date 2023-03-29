@@ -49,9 +49,6 @@ else:
 
 headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Content-type': 'application/json', 'Csrf-Token': JSESSIONID}
 cookies_dict = {"li_at": li_at, "JSESSIONID": JSESSIONID}
-http_proxy  = "http://127.0.0.1:8080"
-
-proxies = {"http"  : http_proxy}
 
 if (url.startswith('https://www.linkedin.com/company/')):
 	try:
@@ -64,7 +61,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 
 		api1 = "https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies?decorationId=com.linkedin.voyager.dash.deco.organization.MiniCompany-10&q=universalName&universalName=" + str(company)
 		# request to query a company's urn ID
-		r = requests.get(api1, headers=headers, cookies=cookies_dict, proxies=proxies)
+		r = requests.get(api1, headers=headers, cookies=cookies_dict)
 		response1 = r.json()
 
 		# retrieve company urn from the api; e.g. "urn:li:fsd_company:42848399"
@@ -75,7 +72,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 
 		api2 = "https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List(" + str(companyID) + "),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count=" + str(paging_count)+ "&start=0"
 		# retrieve employee information from the api based on previously obtained company id
-		r2 = requests.get(api2, headers=headers, cookies=cookies_dict, proxies=proxies)
+		r2 = requests.get(api2, headers=headers, cookies=cookies_dict)
 		response2 = r2.json()
 
 		paging_total = response2["paging"]["total"]
@@ -157,7 +154,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		for page in progressbar(range(required_pagings), "Progress: ", 40):
 			api2 = "https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List(" + str(companyID) + "),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count=" + str(paging_count)+ "&start=" + str(page*10)
 			# retrieve employee information from the api based on previously obtained company id
-			r2 = requests.get(api2, headers=headers, cookies=cookies_dict, proxies=proxies)
+			r2 = requests.get(api2, headers=headers, cookies=cookies_dict)
 			response2 = r2.json()
 
 			try:
