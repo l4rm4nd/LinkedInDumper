@@ -251,7 +251,7 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		# likely authorization error due to incorrect 'login' cookie
 		# otherwise the script is broken or the api has been changed
 		print("[!] Authenticated session cookie required.")
-		print("    > Set variable permanently in script or use the '--session-cookie' CLI flag!")
+		print("    > Set variable permanently in script or use the '--cookie' CLI flag!")
 		print("[debug] " + str(e))
 else:
 	print()
