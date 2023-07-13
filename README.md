@@ -98,6 +98,13 @@ Raymond;Chen;raymond.chen@apple.com;Recruiting at Apple;N/A;Austin, Texas Metrop
 [i] Successfully crawled 2 unique apple employee(s). Hurray ^_-
 ````
 
+It's also possible to obtain all e-mail addresses in a single file, which is very useful for password spraying during a red team.
+
+```
+cat emails.csv | grep @<compagy.com> | cut -d ';' -f 3 > email.txt
+
+```
+
 ## 💥 Limitations
 
 LinkedIn will allow only the first 1,000 search results to be returned when harvesting contact information. You may also need a LinkedIn premium account when you reached the maximum allowed queries for visiting profiles with your freemium LinkedIn account.
