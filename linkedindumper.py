@@ -46,7 +46,7 @@ if (args.email_format):
 else:
 	mailformat = False
 
-headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Content-type': 'application/json', 'Csrf-Token': JSESSIONID}
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0', 'Content-type': 'application/json', 'Csrf-Token': JSESSIONID}
 cookies_dict = {"li_at": li_at, "JSESSIONID": JSESSIONID}
 
 if (url.startswith('https://www.linkedin.com/company/')):
