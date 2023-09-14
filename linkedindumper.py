@@ -247,10 +247,8 @@ if (url.startswith('https://www.linkedin.com/company/')):
 			print("[i] Successfully crawled " + str(len(employee_dict)) + " unique " + str(company) + " employee(s). Hurray ^_-")
 
 	except Exception as e:
-		# likely authorization error due to incorrect 'login' cookie
-		# otherwise the script is broken or the api has been changed
-		print("[!] Authenticated session cookie required.")
-		print("    > Set variable permanently in script or use the '--cookie' CLI flag!")
+		print("[!] Exception. Either API has changed and this script is broken or authentication failed.")
+		print("    > Set 'li_at' variable permanently in script or use the '--cookie' CLI flag!")
 		print("[debug] " + str(e))
 else:
 	print()
