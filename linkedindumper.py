@@ -10,7 +10,7 @@ from datetime import datetime
 import urllib.parse
 import textwrap
 
-# mandatory authenticated session cookie
+# you may store your session cookie here persistently
 li_at = "YOUR-COOKIE-VALUE"
 
 # converting german umlauts
