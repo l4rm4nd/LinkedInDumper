@@ -107,7 +107,7 @@ Finally, LinkedIn users are free to name their profile. An account name can ther
 
 ## 💰 Sponsors
 
-<a href="https://nubela.co/proxycurl/?utm_campaign=influencer%20marketing&utm_source=github&utm_medium=social&utm_term=-&utm_content=lrvt_linkedin_dumper"><img src="https://raw.githubusercontent.com/l4rm4nd/LinkedInDumper/main/proxycurl.png" width="25%"></a>
+<a href="https://nubela.co/proxycurl/?utm_campaign=influencer%20marketing&utm_source=github&utm_medium=social&utm_term=-&utm_content=lrvt_linkedin_dumper"><img src="https://raw.githubusercontent.com/l4rm4nd/LinkedInDumper/main/proxycurl.png" width="300px"></a>
 
 Scrape public LinkedIn profile data at scale with [Proxycurl APIs](https://nubela.co/proxycurl/?utm_campaign=influencer%20marketing&utm_source=github&utm_medium=social&utm_term=-&utm_content=lrvt_linkedin_dumper).
 
