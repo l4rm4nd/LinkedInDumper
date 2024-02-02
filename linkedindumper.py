@@ -175,37 +175,46 @@ if (url.startswith('https://www.linkedin.com/company/')):
 				pass
 
 			for employee in results:
-				# get a user's full account name and remove some known abbreviations and salutations
-				account_name = clean_data(employee["itemUnion"]['entityResult']["title"]["text"]).split(" ")
-				badwords = ['Prof.', 'Dr.', 'M.A.', ',', 'LL.M.']
-				for word in list(account_name):
-					if word in badwords:
-						account_name.remove(word)
 
-				# if the account name consists of 2 strings, assume firstname and lastname
-				if len(account_name) == 2:
-					firstname = account_name[0]
-					lastname = account_name[1]
-				# otherwise it is some unknown format with saluation, or middle name or random abbreviations
-				else:
-					# combine everything up to last string into firstname
-					firstname = ' '.join(map(str,account_name[0:(len(account_name)-1)]))
-					# use the last string as lastname
-					lastname = account_name[-1]
+				try:
+					# get a user's full account name and remove some known abbreviations and salutations
+					account_name = clean_data(employee["itemUnion"]['entityResult']["title"]["text"]).split(" ")
+					badwords = ['Prof.', 'Dr.', 'M.A.', ',', 'LL.M.']
+					for word in list(account_name):
+						if word in badwords:
+							account_name.remove(word)
+
+					# if the account name consists of 2 strings, assume firstname and lastname
+					if len(account_name) == 2:
+						firstname = account_name[0]
+						lastname = account_name[1]
+					# otherwise it is some unknown format with saluation, or middle name or random abbreviations
+					else:
+						# combine everything up to last string into firstname
+						firstname = ' '.join(map(str,account_name[0:(len(account_name)-1)]))
+						# use the last string as lastname
+						lastname = account_name[-1]
+				except:
+					# if the account name is not avail; just skip and process next entry
+					continue
 
 				try:
 					position = clean_data(employee["itemUnion"]['entityResult']["primarySubtitle"]["text"])
 				except:
 					position = "N/A"
+				
+				# gender is not avail in json; just provide it to be aligned to xingdumper
 				gender = "N/A"
 
-				# an account's location is sometimes unaccessible
 				try:
 					location = employee["itemUnion"]['entityResult']["secondarySubtitle"]["text"]
 				except:
 					location = "N/A"
 
-				profile_link = employee["itemUnion"]['entityResult']["navigationUrl"].split("?")[0]
+				try:
+					profile_link = employee["itemUnion"]['entityResult']["navigationUrl"].split("?")[0]
+				except:
+					profile_link = "N/A"
 
 				if args.include_private_profiles:
 					employee_dict.append({"firstname":firstname, "lastname":lastname, "position":position, "gender":gender, "location":location, "profile_link":profile_link})
