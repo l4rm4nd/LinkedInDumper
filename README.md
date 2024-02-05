@@ -104,19 +104,3 @@ LinkedIn will allow only the first 1,000 search results to be returned when harv
 Furthermore, not all employee profiles are public. The results vary depending on your used LinkedIn account and whether you are befriended with some employees of the company to crawl or not. Therefore, it is sometimes not possible to retrieve the firstname, lastname and profile url of some employee accounts. The script will not display such profiles, as they contain default values such as "LinkedIn" as firstname and "Member" in the lastname. If you want to include such private profiles, please use the CLI flag ``--include-private-profiles``. Although some accounts may be private, we can obtain the position (title) as well as the location of such accounts. Only firstname, lastname and profile URL are hidden for private LinkedIn accounts.
 
 Finally, LinkedIn users are free to name their profile. An account name can therefore consist of various things such as saluations, abbreviations, emojis, middle names etc. I tried my best to remove some nonsense. However, this is not a complete solution to the general problem. Note that we are not using the official LinkedIn API. This script gathers information from the "unofficial" Voyager API.
-
-## 💰 Sponsors
-
-<a href="https://nubela.co/proxycurl/?utm_campaign=influencer%20marketing&utm_source=github&utm_medium=social&utm_term=-&utm_content=lrvt_linkedin_dumper"><img src="https://raw.githubusercontent.com/l4rm4nd/LinkedInDumper/main/proxycurl.png" width="300px"></a>
-
-Scrape public LinkedIn profile data at scale with [Proxycurl APIs](https://nubela.co/proxycurl/?utm_campaign=influencer%20marketing&utm_source=github&utm_medium=social&utm_term=-&utm_content=lrvt_linkedin_dumper).
-
-• Scraping Public profiles are battle tested in court in HiQ VS LinkedIn case.<br/>
-• GDPR, CCPA, SOC2 compliant<br/>
-• High rate limit - 300 requests/minute<br/>
-• Fast - APIs respond in ~2s<br/>
-• Fresh data - 88% of data is scraped real-time, other 12% are not older than 29 days<br/>
-• High accuracy<br/>
-• Tons of data points returned per profile
-
-Built for developers, by developers.
