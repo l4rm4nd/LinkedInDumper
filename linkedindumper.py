@@ -1,4 +1,5 @@
 import requests
+import random
 import json
 import re
 import argparse
@@ -30,6 +31,7 @@ parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' sessi
 parser.add_argument("--quiet", help="Show employee results only", required=False, action='store_true')
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
 parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, required=False, type=str)
+parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true')
 
 args = parser.parse_args()
 url = args.url
@@ -151,6 +153,11 @@ if (url.startswith('https://www.linkedin.com/company/')):
 		employee_dict = []
 		# paginate API results
 		for page in progressbar(range(required_pagings), "Progress: ", 40):
+			if args.jitter:
+				jitter_dict = [0.5, 1, 0.8, 0.3, 3, 1.5, 5]
+				jitter = random.randrange(0, len(jitter_dict) - 1)
+				time.sleep(jitter)
+
 			api2 = "https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List(" + str(companyID) + "),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count=" + str(paging_count)+ "&start=" + str(page*10)
 			# retrieve employee information from the api based on previously obtained company id
 			r2 = requests.get(api2, headers=headers, cookies=cookies_dict)
@@ -263,3 +270,4 @@ else:
 	print()
 	print("[!] Invalid URL provided.")
 	print("[i] Example URL: 'https://www.linkedin.com/company/apple'")
+
