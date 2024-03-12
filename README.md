@@ -36,7 +36,7 @@ LinkedInDumper talks with the unofficial LinkedIn Voyager API, which requires au
 ## 🎓 Usage
 
 ````
-usage: linkedindumper.py [-h] --url <linkedin-url> [--cookie <cookie>] [--quiet] [--include-private-profiles] [--email-format EMAIL_FORMAT]
+usage: linkedindumper.py [-h] --url <linkedin-url> [--cookie <cookie>] [--quiet] [--include-private-profiles] [--jitter] [--email-format EMAIL_FORMAT]
 
 options:
   -h, --help            show this help message and exit
@@ -45,7 +45,9 @@ options:
   --quiet               Show employee results only
   --include-private-profiles
                         Show private accounts too
-  --email-format        Python string format for emails; for example:
+  --jitter              Add a random jitter to HTTP requests
+  --email-format EMAIL_FORMAT
+                        Python string format for emails; for example:
                         --email-format '{0}.{1}@example.com' --> john.doe@example.com
                         --email-format '{0[0]}.{1}@example.com' --> j.doe@example.com
                         --email-format '{1}@example.com' --> doe@example.com
