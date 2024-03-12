@@ -45,7 +45,7 @@ options:
   --quiet               Show employee results only
   --include-private-profiles
                         Show private accounts too
-  --jitter              Add a random jitter to HTTP requests
+  --jitter              Add a random jitter to HTTP requests to bypass rate limiting
   --email-format EMAIL_FORMAT
                         Python string format for emails; for example:
                         --email-format '{0}.{1}@example.com' --> john.doe@example.com
