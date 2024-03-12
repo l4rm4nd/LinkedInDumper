@@ -30,8 +30,8 @@ parser.add_argument("--url", metavar='<linkedin-url>', help="A LinkedIn company 
 parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' session cookie", type=str, required=False,)
 parser.add_argument("--quiet", help="Show employee results only", required=False, action='store_true')
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
-parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, required=False, type=str)
 parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true')
+parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, required=False, type=str)
 
 args = parser.parse_args()
 url = args.url
