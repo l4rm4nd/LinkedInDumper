@@ -93,8 +93,8 @@ The script will return employee data as semi-colon separated values (like CSV):
 [i] Email Format: {0}.{1}@apple.de
 
 Firstname;Lastname;Email;Position;Gender;Location;Profile
-Katrin;Honauer;katrin.honauer@apple.com;Software Engineer at Apple;N/A;Heidelberg;https://www.linkedin.com/in/katrin-honauer
-Raymond;Chen;raymond.chen@apple.com;Recruiting at Apple;N/A;Austin, Texas Metropolitan Area;https://www.linkedin.com/in/raytherecruiter
+Katrin;Honauer;katrin.honauer@apple.de;Software Engineer at Apple;N/A;Heidelberg;https://www.linkedin.com/in/katrin-honauer
+Raymond;Chen;raymond.chen@apple.de;Recruiting at Apple;N/A;Austin, Texas Metropolitan Area;https://www.linkedin.com/in/raytherecruiter
 
 [i] Successfully crawled 2 unique apple employee(s). Hurray ^_-
 ````
