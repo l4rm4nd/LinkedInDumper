@@ -62,8 +62,15 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Extract version parts
+        id: extract_version
+        run: |
+          VERSION=${{ needs.changelog.outputs.version }}
+          MAJOR_MINOR=$(echo $VERSION | cut -d'.' -f1,2)
+          echo "MAJOR_MINOR_TAG=${MAJOR_MINOR}.x" >> $GITHUB_ENV
+
       - name: Setup Docker Metadata
-        uses: docker/metadata-action@dbef88086f6cef02e264edb7dbf63250c17cef6c # v5
+        uses: docker/metadata-action@v5
         id: meta
         with:
           images: |
@@ -72,6 +79,7 @@ jobs:
             latest
             ${{ needs.changelog.outputs.version }}
             ${{ github.sha }}
+            ${{ env.MAJOR_MINOR_TAG }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5
