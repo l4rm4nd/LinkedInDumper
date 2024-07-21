@@ -1,3 +1,12 @@
+## [0.1.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.1...v0.1.2) (2024-07-21)
+
+
+### Bug Fixes
+
+* **code:** refactor the py script ([7414673](https://github.com/l4rm4nd/LinkedInDumper/commit/74146730c6003db36c1110900849d7fef9fab9aa))
+
+
+
 ## [0.1.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.0...v0.1.1) (2024-07-19)
 
 
