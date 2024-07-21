@@ -78,7 +78,6 @@ jobs:
           tags: |
             latest
             ${{ needs.changelog.outputs.version }}
-            ${{ github.sha }}
             ${{ env.MAJOR_MINOR_TAG }}
 
       - name: Build and Push Docker Image
