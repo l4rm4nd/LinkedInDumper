@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.12.4-alpine
 LABEL Maintainer="LRVT"
 
 COPY requirements.txt linkedindumper.py /app/.
