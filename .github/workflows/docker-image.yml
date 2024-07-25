@@ -42,6 +42,27 @@ jobs:
           body: ${{ steps.changelog.outputs.clean_changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
+  bandit:
+    name: SAST with Bandit
+    needs: changelog
+    if: github.event_name != 'pull_request' && needs.changelog.outputs.skipped == 'false'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Run Bandit
+        run: bandit -r linkedindumper.py --severity-level medium
+
   deploy:
     name: Deploy Image
     needs: changelog
