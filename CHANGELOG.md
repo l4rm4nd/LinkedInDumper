@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.3...v0.1.4) (2024-07-25)
+
+
+### Bug Fixes
+
+* **python:** add timeout for requests ([ba2d3d9](https://github.com/l4rm4nd/LinkedInDumper/commit/ba2d3d996827bcb7e8f377991f1e695f0ce7755d))
+
+
+
 ## [0.1.3](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.2...v0.1.3) (2024-07-21)
 
 
