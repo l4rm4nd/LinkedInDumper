@@ -65,7 +65,7 @@ jobs:
 
   deploy:
     name: Deploy Image
-    needs: changelog
+    needs: [changelog, bandit]
     if: github.event_name != 'pull_request' && needs.changelog.outputs.skipped == 'false'
     runs-on: ubuntu-latest
 
@@ -112,7 +112,7 @@ jobs:
 
   release:
     name: Release
-    needs: changelog
+    needs: [changelog, bandit]
     if: github.event_name != 'pull_request' && needs.changelog.outputs.skipped == 'false'
     runs-on: ubuntu-latest
 
