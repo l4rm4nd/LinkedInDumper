@@ -2,7 +2,8 @@
     <h1>LinkedInDumper</h1>
     <p>Python 3 script to dump company employees from LinkedIn API</p><p>
     <a target="_blank" href="https://github.com/l4rm4nd"><img src="https://img.shields.io/badge/maintainer-LRVT-orange" /></a>
-    <a target="_blank" href="https://GitHub.com/l4rm4nd/LinkedInDumper/graphs/contributors/"><img src="https://img.shields.io/github/contributors/l4rm4nd/LinkedInDumper.svg" /></a><br>
+    <a target="_blank" href="https://GitHub.com/l4rm4nd/LinkedInDumper/graphs/contributors/"><img src="https://img.shields.io/github/contributors/l4rm4nd/LinkedInDumper.svg" /></a>
+    <a target="_blank" href="https://github.com/PyCQA/bandit"><img src="https://img.shields.io/badge/security-bandit-yellow.svg"/></a><br>
     <a target="_blank" href="https://GitHub.com/l4rm4nd/LinkedInDumper/commits/"><img src="https://img.shields.io/github/last-commit/l4rm4nd/LinkedInDumper.svg" /></a>
     <a target="_blank" href="https://GitHub.com/l4rm4nd/LinkedInDumper/issues/"><img src="https://img.shields.io/github/issues/l4rm4nd/LinkedInDumper.svg" /></a>
     <a target="_blank" href="https://github.com/l4rm4nd/LinkedInDumper/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/l4rm4nd/LinkedInDumper.svg" /></a><br>
