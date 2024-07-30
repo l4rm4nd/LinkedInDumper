@@ -81,14 +81,14 @@ def show_loading_message(stop_event):
 def get_company_id(company):
 	company_encoded = urllib.parse.quote(company)
 	api1 = f"https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies?decorationId=com.linkedin.voyager.dash.deco.organization.MiniCompany-10&q=universalName&universalName={company_encoded}"
-	r = requests.get(api1, headers=headers, cookies=cookies_dict, timeout=10)
+	r = requests.get(api1, headers=headers, cookies=cookies_dict, timeout=200)
 	response1 = r.json()
 	company_id = response1["elements"][0]["entityUrn"].split(":")[-1]
 	return company_id
 
 def get_employee_data(company_id, start, count=10):
 	api2 = f"https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List({company_id}),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count={count}&start={start}"
-	r = requests.get(api2, headers=headers, cookies=cookies_dict, timeout=10)
+	r = requests.get(api2, headers=headers, cookies=cookies_dict, timeout=200)
 	response2 = r.json()
 	return response2
 
