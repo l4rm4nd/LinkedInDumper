@@ -109,3 +109,6 @@ Furthermore, not all employee profiles are public. The results vary depending on
 Finally, LinkedIn users are free to name their profile. An account name can therefore consist of various things such as saluations, abbreviations, emojis, middle names etc. I tried my best to remove some nonsense. However, this is not a complete solution to the general problem. Note that we are not using the official LinkedIn API. This script gathers information from the "unofficial" Voyager API.
 
 If you perceive an error message like `maximum request exceeded`, try the `--jitter` CLI parameter to introduce some delays for the automated API requests. This may be able to bypass the implemented detections or rate limiting by LinkedIn.
+
+## 🤖 Repo Statistics
+![Alt](https://repobeats.axiom.co/api/embed/80ef10c0169d00b77b5c6fdbbf8ed475dc2e6f4f.svg "Repobeats analytics image")
