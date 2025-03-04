@@ -31,7 +31,9 @@ parser.add_argument("--url", metavar='<linkedin-url>', help="A LinkedIn company 
 parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' session cookie", type=str, required=False)
 parser.add_argument("--quiet", help="Show employee results only", required=False, action='store_true')
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
-parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true')
+parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true'),
+parser.add_argument("--output", "-o", help="Output file", required=False, type=str)
+parser.add_argument("--format", "-f", help="Result format", choices=['csv','json'], default='csv' ,required=False)
 parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, required=False, type=str)
 
 args = parser.parse_args()
@@ -241,18 +243,40 @@ def main():
 					new_l.append(d)
 			employee_dict = new_l
 
-			if mailformat:
-				legende = "Firstname;Lastname;Email;Position;Gender;Location;Profile"
-			else:
-				legende = "Firstname;Lastname;Position;Gender;Location;Profile"
+			match args.format:
+				case 'csv':
+					if mailformat:
+						legende = "Firstname;Lastname;Email;Position;Gender;Location;Profile"
+					else:
+						legende = "Firstname;Lastname;Position;Gender;Location;Profile"
 
-			print(legende)
+					if args.output:
+						with open(args.output, 'a') as output_file:
+							output_file.write(legende)
+							for person in employee_dict:
+								if mailformat:
+									output_file.write(person["firstname"]+";"+person["lastname"]+";"+mailformat.format(person["firstname"].replace(".","").lower().translate(special_char_map),person["lastname"].replace(".","").lower().translate(special_char_map))+";"+person["position"]+";"+person["gender"]+";"+person["location"]+";"+person["profile_link"])
+								else:
+									output_file.write(";".join(person.values()))
+							print(f'Result save in {args.output}')
+							
+					else:
+						print(legende)
+						for person in employee_dict:
+							if mailformat:
+								print(person["firstname"]+";"+person["lastname"]+";"+mailformat.format(person["firstname"].replace(".","").lower().translate(special_char_map),person["lastname"].replace(".","").lower().translate(special_char_map))+";"+person["position"]+";"+person["gender"]+";"+person["location"]+";"+person["profile_link"])
+							else:
+								print(";".join(person.values()))
+				case 'json':
+					json_output = { args.url : employee_dict }
 
-			for person in employee_dict:
-				if mailformat:
-					print(person["firstname"]+";"+person["lastname"]+";"+mailformat.format(person["firstname"].replace(".","").lower().translate(special_char_map),person["lastname"].replace(".","").lower().translate(special_char_map))+";"+person["position"]+";"+person["gender"]+";"+person["location"]+";"+person["profile_link"])
-				else:
-					print(";".join(person.values()))
+					if args.output:
+						with open(args.output, 'a') as output_file:
+							json.dump(json_output, output_file, indent=4)
+						print(f'Result save in {args.output}')
+					else:
+						print(json_output)
+
 
 			if not args.quiet:
 				print()
