@@ -32,9 +32,9 @@ parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' sessi
 parser.add_argument("--quiet", help="Show employee results only", required=False, action='store_true')
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
 parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true'),
-parser.add_argument("--output", "-o", help="Output file", required=False, type=str)
+parser.add_argument("--output", "-o", metavar='<filename>', help="Output file", required=False, type=str)
 parser.add_argument("--format", "-f", help="Result format", choices=['csv','json'], default='csv' ,required=False)
-parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, required=False, type=str)
+parser.add_argument("--email-format", metavar='<format>', help="Python string format for emails; for example:"+format_examples, required=False, type=str)
 
 args = parser.parse_args()
 url = args.url
