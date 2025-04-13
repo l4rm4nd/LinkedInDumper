@@ -1,3 +1,10 @@
+## [0.2.0](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.5...v0.2.0) (2025-04-13)
+
+
+### Features
+
+* add output options ([4f86ab5](https://github.com/l4rm4nd/LinkedInDumper/commit/4f86ab57d20a3a3aaa2d5312654047b007c64d83))
+
 ## [0.1.5](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.4...v0.1.5) (2024-07-30)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * **code:** refactor the py script ([7414673](https://github.com/l4rm4nd/LinkedInDumper/commit/74146730c6003db36c1110900849d7fef9fab9aa))
-
-## [0.1.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.0...v0.1.1) (2024-07-19)
-
-
-### Bug Fixes
-
-* **ci:** push minor version tags ([c1661da](https://github.com/l4rm4nd/LinkedInDumper/commit/c1661dacff85b94a839ec3a2a91a068bfd209645))
 
