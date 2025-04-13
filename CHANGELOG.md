@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.0...v0.2.1) (2025-04-13)
+
+
+### Bug Fixes
+
+* add missing argparse metavars and help text ([9d2e19b](https://github.com/l4rm4nd/LinkedInDumper/commit/9d2e19b2fa135d6e445253ea3f4619cfeb628bf8))
+
 ## [0.2.0](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.5...v0.2.0) (2025-04-13)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * **docker:** upgrade base python image ([3ec72d9](https://github.com/l4rm4nd/LinkedInDumper/commit/3ec72d978df284dcc0b2d47cc3ea436931463c6c))
-
-## [0.1.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.1...v0.1.2) (2024-07-21)
-
-
-### Bug Fixes
-
-* **code:** refactor the py script ([7414673](https://github.com/l4rm4nd/LinkedInDumper/commit/74146730c6003db36c1110900849d7fef9fab9aa))
 
