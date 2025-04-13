@@ -54,6 +54,10 @@ options:
                         --email-format '{1}@example.com' --> doe@example.com
                         --email-format '{0}@example.com' --> john@example.com
                         --email-format '{0[0]}{1[0]}@example.com' --> jd@example.com
+  --output-json <json-file>
+                        Store results in json output file
+  --output-csv <csv-file>
+                        Store results in csv output file                        
 ````
 
 ### 🐳 Example 1 - Docker Run
@@ -99,6 +103,8 @@ Raymond;Chen;raymond.chen@apple.de;Recruiting at Apple;N/A;Austin, Texas Metropo
 
 [i] Successfully crawled 2 unique apple employee(s). Hurray ^_-
 ````
+
+Optionally, you can use the CLI parameters `--output-json` and `--output-csv` to store the results as JSON or CSV.
 
 ## 💥 Limitations
 
