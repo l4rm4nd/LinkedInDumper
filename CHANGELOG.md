@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.1...v0.2.2) (2025-04-13)
+
+
+### Bug Fixes
+
+* add slug and timestamp to json output; readd logo ([4ff95e8](https://github.com/l4rm4nd/LinkedInDumper/commit/4ff95e8ea0fca82292f681c7d4eaf2ebca6822c6))
+
 ## [0.2.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.0...v0.2.1) (2025-04-13)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * **python:** add timeout for requests ([ba2d3d9](https://github.com/l4rm4nd/LinkedInDumper/commit/ba2d3d996827bcb7e8f377991f1e695f0ce7755d))
-
-## [0.1.3](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.2...v0.1.3) (2024-07-21)
-
-
-### Bug Fixes
-
-* **docker:** upgrade base python image ([3ec72d9](https://github.com/l4rm4nd/LinkedInDumper/commit/3ec72d978df284dcc0b2d47cc3ea436931463c6c))
 
