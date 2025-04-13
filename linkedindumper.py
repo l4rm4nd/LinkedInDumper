@@ -29,9 +29,9 @@ parser.add_argument("--url", metavar='<linkedin-url>', help="A LinkedIn company 
 parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' session cookie", type=str, required=False)
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
 parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true')
-parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, required=False, type=str)
-parser.add_argument("--output-json", metavar="<json-file>", type=str, required=False)
-parser.add_argument("--output-csv", metavar="<csv-file>", type=str, required=False)
+parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, metavar="<mail-format>", required=False, type=str)
+parser.add_argument("--output-json", help="Store results in json output file", metavar="<json-file>", type=str, required=False)
+parser.add_argument("--output-csv", help="Store results in csv output file", metavar="<csv-file>", type=str, required=False)
 
 args = parser.parse_args()
 url = args.url
