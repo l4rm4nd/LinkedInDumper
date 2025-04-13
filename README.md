@@ -43,7 +43,6 @@ options:
   -h, --help            show this help message and exit
   --url <linkedin-url>  A LinkedIn company url - https://www.linkedin.com/company/<company>
   --cookie <cookie>     LinkedIn 'li_at' session cookie
-  --quiet               Show employee results only
   --include-private-profiles
                         Show private accounts too
   --jitter              Add a random jitter to HTTP requests to bypass rate limiting
