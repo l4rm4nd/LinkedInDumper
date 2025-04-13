@@ -50,6 +50,21 @@ headers = {
 }
 cookies_dict = {"li_at": li_at, "JSESSIONID": JSESSIONID}
 
+def print_logo():
+    print("""\
+
+ ██▓     ██▓ ███▄    █  ██ ▄█▀▓█████ ▓█████▄  ██▓ ███▄    █ ▓█████▄  █    ██  ███▄ ▄███▓ ██▓███  ▓█████  ██▀███  
+▓██▒    ▓██▒ ██ ▀█   █  ██▄█▒ ▓█   ▀ ▒██▀ ██▌▓██▒ ██ ▀█   █ ▒██▀ ██▌ ██  ▓██▒▓██▒▀█▀ ██▒▓██░  ██▒▓█   ▀ ▓██ ▒ ██▒
+▒██░    ▒██▒▓██  ▀█ ██▒▓███▄░ ▒███   ░██   █▌▒██▒▓██  ▀█ ██▒░██   █▌▓██  ▒██░▓██    ▓██░▓██░ ██▓▒▒███   ▓██ ░▄█ ▒
+▒██░    ░██░▓██▒  ▐▌██▒▓██ █▄ ▒▓█  ▄ ░▓█▄   ▌░██░▓██▒  ▐▌██▒░▓█▄   ▌▓▓█  ░██░▒██    ▒██ ▒██▄█▓▒ ▒▒▓█  ▄ ▒██▀▀█▄  
+░██████▒░██░▒██░   ▓██░▒██▒ █▄░▒████▒░▒████▓ ░██░▒██░   ▓██░░▒████▓ ▒▒█████▓ ▒██▒   ░██▒▒██▒ ░  ░░▒████▒░██▓ ▒██▒
+░ ▒░▓  ░░▓  ░ ▒░   ▒ ▒ ▒ ▒▒ ▓▒░░ ▒░ ░ ▒▒▓  ▒ ░▓  ░ ▒░   ▒ ▒  ▒▒▓  ▒ ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░▒▓▒░ ░  ░░░ ▒░ ░░ ▒▓ ░▒▓░
+░ ░ ▒  ░ ▒ ░░ ░░   ░ ▒░░ ░▒ ▒░ ░ ░  ░ ░ ▒  ▒  ▒ ░░ ░░   ░ ▒░ ░ ▒  ▒ ░░▒░ ░ ░ ░  ░      ░░▒ ░      ░ ░  ░  ░▒ ░ ▒░
+  ░ ░    ▒ ░   ░   ░ ░ ░ ░░ ░    ░    ░ ░  ░  ▒ ░   ░   ░ ░  ░ ░  ░  ░░░ ░ ░ ░      ░   ░░          ░     ░░   ░ 
+    ░  ░ ░           ░ ░  ░      ░  ░   ░     ░           ░    ░       ░            ░               ░  ░   ░     
+                                      ░                      ░                                         ░ by LRVT      
+    """)
+
 def clean_data(data):
     emoj = re.compile("[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF"
                       "\U0001F680-\U0001F6FF\U0001F1E0-\U0001F1FF"
@@ -137,8 +152,18 @@ def main():
             required_pagings = -(-paging_total // 10)
 
             employee_dict = []
+
+            print_logo()
+
+            print("[i] Company Name: " + company)
+            print("[i] Company X-ID: " + company_id)
+            print("[i] LN Employees: " + str(paging_total) + " employees found")
+            print("[i] Dumping Date: " + datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+            if mailformat:
+                print("[i] Email Format: " + mailformat)
+
             if args.output_csv or args.output_json:
-            	print()
+                print()
             for page in progressbar(range(required_pagings), "Progress: ", 40):
                 if args.jitter:
                     time.sleep(random.choice([0.5, 1, 0.8, 0.3, 3, 1.5, 5]))
@@ -184,6 +209,8 @@ def main():
                     output_data = {
                         "company_id": company_id,
                         "company_url": url,
+                        "company_slug": company,
+                        "timestamp": datetime.now().isoformat(),
                         "employees": employee_dict
                     }
                     with open(args.output_json, 'w', encoding='utf-8') as f:
