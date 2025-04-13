@@ -12,8 +12,10 @@ import urllib.parse
 import threading
 import csv
 
-li_at = ""
+# You may store your session cookie here persistently
+li_at = "YOUR-COOKIE-VALUE"
 
+# Converting German umlauts
 special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
 
 format_examples = '''
@@ -36,8 +38,10 @@ parser.add_argument("--output-csv", help="Store results in csv output file", met
 args = parser.parse_args()
 url = args.url
 
+# Optional CSRF token, not needed for GET requests but still defined to be sure
 JSESSIONID = "ajax:5739908118104050450"
 
+# Overwrite variables if set via CLI
 if args.cookie:
     li_at = args.cookie
 
