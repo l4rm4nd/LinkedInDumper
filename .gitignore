@@ -1,0 +1,8 @@
+# Ignore all JSON and CSV files
+*.json
+*.csv
+
+# Optional: ignore specific output directories if you organize results
+/output/
+results/
+
