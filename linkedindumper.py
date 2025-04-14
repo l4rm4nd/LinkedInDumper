@@ -6,11 +6,13 @@ import argparse
 from argparse import RawTextHelpFormatter
 import sys
 import time
+import ast
 import unidecode
 from datetime import datetime
 import urllib.parse
 import threading
 import csv
+from urllib.parse import urlparse
 
 # You may store your session cookie here persistently
 li_at = "YOUR-COOKIE-VALUE"
@@ -30,6 +32,7 @@ parser = argparse.ArgumentParser("linkedindumper.py", formatter_class=RawTextHel
 parser.add_argument("--url", metavar='<linkedin-url>', help="A LinkedIn company url - https://www.linkedin.com/company/<company>", type=str, required=True)
 parser.add_argument("--cookie", metavar='<cookie>', help="LinkedIn 'li_at' session cookie", type=str, required=False)
 parser.add_argument("--include-private-profiles", help="Show private accounts too", required=False, action='store_true')
+parser.add_argument("--include-contact-infos", help="Query each employee and retrieve contact infos", required=False, action='store_true')
 parser.add_argument("--jitter", help="Add a random jitter to HTTP requests", required=False, action='store_true')
 parser.add_argument("--email-format", help="Python string format for emails; for example:"+format_examples, metavar="<mail-format>", required=False, type=str)
 parser.add_argument("--output-json", help="Store results in json output file", metavar="<json-file>", type=str, required=False)
@@ -114,14 +117,21 @@ def parse_employee_results(results):
             profile_link = "N/A"
 
         if args.include_private_profiles or (firstname != "LinkedIn" and lastname != "Member"):
+
+            if args.include_contact_infos and profile_link != "N/A":
+                username = profile_link.rstrip("/").split("/")[-1]
+                full_details = get_employee_contact_infos(username)
+
             employee_dict.append({
                 "firstname": firstname,
                 "lastname": lastname,
                 "position": position,
                 "gender": gender,
                 "location": location,
-                "profile_link": profile_link
+                "profile_link": profile_link,
+                "contact_info": full_details
             })
+
     return employee_dict
 
 def get_company_id(company):
@@ -134,6 +144,71 @@ def get_employee_data(company_id, start, count=10):
     api2 = f"https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List({company_id}),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count={count}&start={start}"
     r = requests.get(api2, headers=headers, cookies=cookies_dict, timeout=200)
     return r.json()
+
+def get_employee_contact_infos(username):
+    api3 = f"https://www.linkedin.com/voyager/api/graphql?includeWebMetadata=true&variables=(memberIdentity:{username})&queryId=voyagerIdentityDashProfiles.c7452e58fa37646d09dae4920fc5b4b9"
+    r = requests.get(api3, headers=headers, cookies=cookies_dict, timeout=200)
+    
+    try:
+        data = r.json()
+    except Exception as e:
+        print("[!] Failed to decode JSON:", e)
+        return None
+
+    # Init default values
+    full_name = email = birthdate = address = phone = None
+
+    elements = data.get("data", {}) \
+               .get("identityDashProfilesByMemberIdentity", {}) \
+               .get("elements", [])
+
+    # Pick the first profile if it exists
+    if elements:
+        profile = elements[0]
+
+        first = profile.get("firstName")
+        last = profile.get("lastName")
+        
+        # Email
+        email_data = profile.get("emailAddress")
+        email = email_data.get("emailAddress") if isinstance(email_data, dict) else None
+
+        # Address
+        address = profile.get("address")
+
+        # Birthdate
+        birth = profile.get("birthDateOn")
+        if isinstance(birth, dict):
+            day = birth.get("day")
+            month = birth.get("month")
+            birthdate = f"{day}. {month_to_string(month)}" if day and month else None
+        else:
+            birthdate = None
+
+        # Phone
+        phone = None
+        phones = profile.get("phoneNumbers", [])
+        if phones and isinstance(phones, list):
+            phone_obj = phones[0].get("phoneNumber")
+            if isinstance(phone_obj, dict):
+                phone = phone_obj.get("number")
+
+    return {
+        "firstname": first,
+        "lastname": last,
+        "email": email,
+        "birthdate": birthdate,
+        "address": address,
+        "phone": phone
+    }
+
+def month_to_string(month):
+    months = {
+        1: "Januar", 2: "Februar", 3: "März", 4: "April",
+        5: "Mai", 6: "Juni", 7: "Juli", 8: "August",
+        9: "September", 10: "Oktober", 11: "November", 12: "Dezember"
+    }
+    return months.get(month, f"Monat {month}")
 
 def progressbar(it, prefix="", size=60, out=sys.stdout):
     count = len(it)
@@ -154,6 +229,9 @@ def main():
             response = get_employee_data(company_id, 0)
             paging_total = response["paging"]["total"]
             required_pagings = -(-paging_total // 10)
+
+            if args.include_contact_infos:
+                args.output_json = str(company) + ".json"
 
             employee_dict = []
 
@@ -182,9 +260,9 @@ def main():
             seen = set()
             unique_employees = []
             for d in employee_dict:
-                t = tuple(sorted(d.items()))
-                if t not in seen:
-                    seen.add(t)
+                dedupe_key = (d.get("firstname"), d.get("lastname"), d.get("profile_link"))
+                if dedupe_key not in seen:
+                    seen.add(dedupe_key)
                     unique_employees.append(d)
             employee_dict = unique_employees
 
@@ -203,7 +281,7 @@ def main():
                 print(legend)
                 for person in employee_dict:
                     if mailformat:
-                        print(f"{person['firstname']};{person['lastname']};{person['email']};{person['position']};{person['gender']};{person['location']};{person['profile_link']}")
+                        print(f"{person['firstname']};{person['lastname']};{person['email']};{person['position']};{person['gender']};{person['location']};{person['profile_link']}")                        
                     else:
                         print(";".join(person.values()))
                 print()

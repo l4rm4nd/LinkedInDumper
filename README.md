@@ -37,7 +37,7 @@ LinkedInDumper talks with the unofficial LinkedIn Voyager API, which requires au
 ## 🎓 Usage
 
 ````
-usage: linkedindumper.py [-h] --url <linkedin-url> [--cookie <cookie>] [--quiet] [--include-private-profiles] [--jitter] [--email-format <mail-format>] [--output-json <json-file>] [--output-csv <csv-file>]
+usage: linkedindumper.py [-h] --url <linkedin-url> [--cookie <cookie>] [--quiet] [--include-private-profiles] [--include-contact-infos] [--jitter] [--email-format <mail-format>] [--output-json <json-file>] [--output-csv <csv-file>]
 
 options:
   -h, --help            show this help message and exit
@@ -45,8 +45,10 @@ options:
   --cookie <cookie>     LinkedIn 'li_at' session cookie
   --include-private-profiles
                         Show private accounts too
+  --include-contact-infos
+                        Query each employee individually and retrieve contact infos
   --jitter              Add a random jitter to HTTP requests to bypass rate limiting
-  --email-format <mail-format>
+  --email-format EMAIL_FORMAT
                         Python string format for emails; for example:
                         --email-format '{0}.{1}@example.com' --> john.doe@example.com
                         --email-format '{0[0]}.{1}@example.com' --> j.doe@example.com
@@ -112,6 +114,8 @@ LinkedIn will allow only the first 1,000 search results to be returned when harv
 Furthermore, not all employee profiles are public. The results vary depending on your used LinkedIn account and whether you are befriended with some employees of the company to crawl or not. Therefore, it is sometimes not possible to retrieve the firstname, lastname and profile url of some employee accounts. The script will not display such profiles, as they contain default values such as "LinkedIn" as firstname and "Member" in the lastname. If you want to include such private profiles, please use the CLI flag ``--include-private-profiles``. Although some accounts may be private, we can obtain the position (title) as well as the location of such accounts. Only firstname, lastname and profile URL are hidden for private LinkedIn accounts.
 
 Finally, LinkedIn users are free to name their profile. An account name can therefore consist of various things such as saluations, abbreviations, emojis, middle names etc. I tried my best to remove some nonsense. However, this is not a complete solution to the general problem. Note that we are not using the official LinkedIn API. This script gathers information from the "unofficial" Voyager API.
+
+You can use the experimental `--include-contact-infos` CLI flag to retrieve additional details from a user's contact info (firstname, lastname, address, phone, email, address). This will query each enumerated LinkedIn user account individually and fetch the data by using the GraphQL API. It returns JSON output only and is very request intensive. If data is returned depends on the user's privacy setting and your used LinkedIn account for enumeration.
 
 If you perceive an error message like `maximum request exceeded`, try the `--jitter` CLI parameter to introduce some delays for the automated API requests. This may be able to bypass the implemented detections or rate limiting by LinkedIn.
 
