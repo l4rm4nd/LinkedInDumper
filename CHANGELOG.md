@@ -1,3 +1,10 @@
+## [0.3.0](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.2...v0.3.0) (2025-04-14)
+
+
+### Features
+
+* add experimental feature to retrieve contact infos ([c680871](https://github.com/l4rm4nd/LinkedInDumper/commit/c68087116baccf5c123936746e230b102c79cd65))
+
 ## [0.2.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.1...v0.2.2) (2025-04-13)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * **py:** increase timout ([11a07f7](https://github.com/l4rm4nd/LinkedInDumper/commit/11a07f7fece9379011800b87971a39eeb45098bb))
-
-## [0.1.4](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.3...v0.1.4) (2024-07-25)
-
-
-### Bug Fixes
-
-* **python:** add timeout for requests ([ba2d3d9](https://github.com/l4rm4nd/LinkedInDumper/commit/ba2d3d996827bcb7e8f377991f1e695f0ce7755d))
 
