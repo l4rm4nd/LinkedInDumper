@@ -48,7 +48,7 @@ options:
   --include-contact-infos
                         Query each employee individually and retrieve contact infos
   --jitter              Add a random jitter to HTTP requests to bypass rate limiting
-  --email-format EMAIL_FORMAT
+  --email-format <mail-format>
                         Python string format for emails; for example:
                         --email-format '{0}.{1}@example.com' --> john.doe@example.com
                         --email-format '{0[0]}.{1}@example.com' --> j.doe@example.com
