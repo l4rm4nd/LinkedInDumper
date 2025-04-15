@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.0...v0.3.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* remove ast imports ([f9ee8d2](https://github.com/l4rm4nd/LinkedInDumper/commit/f9ee8d2ebdcdb60a937158cf97835a2ed1bd9ad8))
+
 ## [0.3.0](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.2...v0.3.0) (2025-04-14)
 
 
@@ -25,11 +32,4 @@
 ### Features
 
 * add output options ([4f86ab5](https://github.com/l4rm4nd/LinkedInDumper/commit/4f86ab57d20a3a3aaa2d5312654047b007c64d83))
-
-## [0.1.5](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.4...v0.1.5) (2024-07-30)
-
-
-### Bug Fixes
-
-* **py:** increase timout ([11a07f7](https://github.com/l4rm4nd/LinkedInDumper/commit/11a07f7fece9379011800b87971a39eeb45098bb))
 
