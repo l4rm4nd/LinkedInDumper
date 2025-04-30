@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.1...v0.3.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* error preventing data processing ([6532573](https://github.com/l4rm4nd/LinkedInDumper/commit/65325730de14ea6621d83245d952bf31c801c19d))
+
 ## [0.3.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.0...v0.3.1) (2025-04-15)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * add missing argparse metavars and help text ([9d2e19b](https://github.com/l4rm4nd/LinkedInDumper/commit/9d2e19b2fa135d6e445253ea3f4619cfeb628bf8))
-
-## [0.2.0](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.1.5...v0.2.0) (2025-04-13)
-
-
-### Features
-
-* add output options ([4f86ab5](https://github.com/l4rm4nd/LinkedInDumper/commit/4f86ab57d20a3a3aaa2d5312654047b007c64d83))
 
