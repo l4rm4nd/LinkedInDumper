@@ -6,7 +6,6 @@ import argparse
 from argparse import RawTextHelpFormatter
 import sys
 import time
-import ast
 import unidecode
 from datetime import datetime
 import urllib.parse
