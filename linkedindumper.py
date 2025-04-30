@@ -6,6 +6,7 @@ import argparse
 from argparse import RawTextHelpFormatter
 import sys
 import time
+import ast
 import unidecode
 from datetime import datetime
 import urllib.parse
@@ -121,15 +122,25 @@ def parse_employee_results(results):
                 username = profile_link.rstrip("/").split("/")[-1]
                 full_details = get_employee_contact_infos(username)
 
-            employee_dict.append({
-                "firstname": firstname,
-                "lastname": lastname,
-                "position": position,
-                "gender": gender,
-                "location": location,
-                "profile_link": profile_link,
-                "contact_info": full_details
-            })
+                employee_dict.append({
+                    "firstname": firstname,
+                    "lastname": lastname,
+                    "position": position,
+                    "gender": gender,
+                    "location": location,
+                    "profile_link": profile_link,
+                    "contact_info": full_details
+                })
+            else:
+                employee_dict.append({
+                    "firstname": firstname,
+                    "lastname": lastname,
+                    "position": position,
+                    "gender": gender,
+                    "location": location,
+                    "profile_link": profile_link
+                })                
+
 
     return employee_dict
 
