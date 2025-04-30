@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.2...v0.3.3) (2025-04-30)
+
+
+### Bug Fixes
+
+* remove unnecessary ast again ([a96586b](https://github.com/l4rm4nd/LinkedInDumper/commit/a96586b48363fda3055065ba559710d6756ec18c))
+
 ## [0.3.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.1...v0.3.2) (2025-04-30)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * add slug and timestamp to json output; readd logo ([4ff95e8](https://github.com/l4rm4nd/LinkedInDumper/commit/4ff95e8ea0fca82292f681c7d4eaf2ebca6822c6))
-
-## [0.2.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.0...v0.2.1) (2025-04-13)
-
-
-### Bug Fixes
-
-* add missing argparse metavars and help text ([9d2e19b](https://github.com/l4rm4nd/LinkedInDumper/commit/9d2e19b2fa135d6e445253ea3f4619cfeb628bf8))
 
