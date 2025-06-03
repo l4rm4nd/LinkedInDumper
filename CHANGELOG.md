@@ -1,3 +1,10 @@
+## [0.3.5](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.4...v0.3.5) (2025-06-03)
+
+
+### Bug Fixes
+
+* return profile link for real users ([e77e2a2](https://github.com/l4rm4nd/LinkedInDumper/commit/e77e2a200f3162aa0257a4fcaae37044c6f89450))
+
 ## [0.3.4](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.3...v0.3.4) (2025-06-03)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * remove ast imports ([f9ee8d2](https://github.com/l4rm4nd/LinkedInDumper/commit/f9ee8d2ebdcdb60a937158cf97835a2ed1bd9ad8))
-
-## [0.3.0](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.2...v0.3.0) (2025-04-14)
-
-
-### Features
-
-* add experimental feature to retrieve contact infos ([c680871](https://github.com/l4rm4nd/LinkedInDumper/commit/c68087116baccf5c123936746e230b102c79cd65))
 
