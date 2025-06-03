@@ -1,3 +1,10 @@
+## [0.3.4](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.3...v0.3.4) (2025-06-03)
+
+
+### Bug Fixes
+
+* support parsing websites and instant_messengers ([8711838](https://github.com/l4rm4nd/LinkedInDumper/commit/87118381ad83a1de5adc859ce2c1c295dfe6d905))
+
 ## [0.3.3](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.2...v0.3.3) (2025-04-30)
 
 
@@ -25,11 +32,4 @@
 ### Features
 
 * add experimental feature to retrieve contact infos ([c680871](https://github.com/l4rm4nd/LinkedInDumper/commit/c68087116baccf5c123936746e230b102c79cd65))
-
-## [0.2.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.2.1...v0.2.2) (2025-04-13)
-
-
-### Bug Fixes
-
-* add slug and timestamp to json output; readd logo ([4ff95e8](https://github.com/l4rm4nd/LinkedInDumper/commit/4ff95e8ea0fca82292f681c7d4eaf2ebca6822c6))
 
