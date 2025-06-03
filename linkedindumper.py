@@ -16,6 +16,12 @@ from urllib.parse import urlparse
 # You may store your session cookie here persistently
 li_at = "YOUR-COOKIE-VALUE"
 
+# Proxies for dev
+proxies = {
+  "http": "http://127.0.0.1:8080",
+  "https": "http://127.0.0.1:8080",
+}
+
 # Converting German umlauts
 special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
 
@@ -117,7 +123,7 @@ def parse_employee_results(results):
 
         if args.include_private_profiles or (firstname != "LinkedIn" and lastname != "Member"):
 
-            if args.include_contact_infos and profile_link != "N/A":
+            if args.include_contact_infos and profile_link.startswith("https://www.linkedin.com/in/"):
                 username = profile_link.rstrip("/").split("/")[-1]
                 full_details = get_employee_contact_infos(username)
 
@@ -137,26 +143,26 @@ def parse_employee_results(results):
                     "position": position,
                     "gender": gender,
                     "location": location,
-                    "profile_link": profile_link
+                    "profile_link": "N/A",
+                    "contact_info": {}
                 })                
-
 
     return employee_dict
 
 def get_company_id(company):
     company_encoded = urllib.parse.quote(company)
     api1 = f"https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies?decorationId=com.linkedin.voyager.dash.deco.organization.MiniCompany-10&q=universalName&universalName={company_encoded}"
-    r = requests.get(api1, headers=headers, cookies=cookies_dict, timeout=200)
+    r = requests.get(api1, headers=headers, cookies=cookies_dict, timeout=200)#, proxies=proxies, verify=False)
     return r.json()["elements"][0]["entityUrn"].split(":")[-1]
 
 def get_employee_data(company_id, start, count=10):
     api2 = f"https://www.linkedin.com/voyager/api/search/dash/clusters?decorationId=com.linkedin.voyager.dash.deco.search.SearchClusterCollection-165&origin=COMPANY_PAGE_CANNED_SEARCH&q=all&query=(flagshipSearchIntent:SEARCH_SRP,queryParameters:(currentCompany:List({company_id}),resultType:List(PEOPLE)),includeFiltersInResponse:false)&count={count}&start={start}"
-    r = requests.get(api2, headers=headers, cookies=cookies_dict, timeout=200)
+    r = requests.get(api2, headers=headers, cookies=cookies_dict, timeout=200)#, proxies=proxies, verify=False)
     return r.json()
 
 def get_employee_contact_infos(username):
     api3 = f"https://www.linkedin.com/voyager/api/graphql?includeWebMetadata=true&variables=(memberIdentity:{username})&queryId=voyagerIdentityDashProfiles.c7452e58fa37646d09dae4920fc5b4b9"
-    r = requests.get(api3, headers=headers, cookies=cookies_dict, timeout=200)
+    r = requests.get(api3, headers=headers, cookies=cookies_dict, timeout=200)#, proxies=proxies, verify=False)
     
     try:
         data = r.json()
@@ -166,6 +172,8 @@ def get_employee_contact_infos(username):
 
     # Init default values
     full_name = email = birthdate = address = phone = None
+    websites = []
+    instant_messengers = []
 
     elements = data.get("data", {}) \
                .get("identityDashProfilesByMemberIdentity", {}) \
@@ -202,13 +210,29 @@ def get_employee_contact_infos(username):
             if isinstance(phone_obj, dict):
                 phone = phone_obj.get("number")
 
+        # Websites
+        websites_data = profile.get("websites", [])
+        for site in websites_data:
+            url = site.get("url")
+            if url:
+                websites.append(url)
+
+        ims = profile.get("instantMessengers", [])
+        for im in ims:
+            provider = im.get("provider")
+            username = im.get("id")
+            if provider and username:
+                instant_messengers.append(f"{provider}:{username}")                
+
     return {
         "firstname": first,
         "lastname": last,
         "email": email,
         "birthdate": birthdate,
         "address": address,
-        "phone": phone
+        "phone": phone,
+        "websites": websites,
+        "instant_messengers": instant_messengers
     }
 
 def month_to_string(month):
@@ -279,7 +303,10 @@ def main():
                 for person in employee_dict:
                     firstname_clean = person["firstname"].replace(".", "").lower().translate(special_char_map)
                     lastname_clean = person["lastname"].replace(".", "").lower().translate(special_char_map)
-                    person["email"] = mailformat.format(firstname_clean, lastname_clean)
+                    if firstname_clean == "linkedin" and lastname_clean == "member":
+                        person["email"] = "N/A"
+                    else:
+                        person["email"] = mailformat.format(firstname_clean, lastname_clean)
 
             if mailformat:
                 legend = "Firstname;Lastname;Email;Position;Gender;Location;Profile"
