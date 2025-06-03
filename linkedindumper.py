@@ -137,13 +137,18 @@ def parse_employee_results(results):
                     "contact_info": full_details
                 })
             else:
+                if (firstname != "LinkedIn" and lastname != "Member"):
+                    profile_link = profile_link
+                else:
+                    profile_link = "N/A"
+                    
                 employee_dict.append({
                     "firstname": firstname,
                     "lastname": lastname,
                     "position": position,
                     "gender": gender,
                     "location": location,
-                    "profile_link": "N/A",
+                    "profile_link": profile_link,
                     "contact_info": {}
                 })                
 
