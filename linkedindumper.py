@@ -324,7 +324,7 @@ def main():
                     if mailformat:
                         print(f"{person['firstname']};{person['lastname']};{person['email']};{person['position']};{person['gender']};{person['location']};{person['profile_link']}")                        
                     else:
-                        print(";".join(person.values()))
+                        print(f"{person['firstname']};{person['lastname']};{person['position']};{person['gender']};{person['location']};{person['profile_link']}")
                 print()
 
             if args.output_json:
