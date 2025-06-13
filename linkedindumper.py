@@ -268,7 +268,7 @@ def main():
             paging_total = response["paging"]["total"]
             required_pagings = -(-paging_total // 10)
 
-            if args.include_contact_infos:
+            if args.include_contact_infos and not args.output_json:
                 args.output_json = str(company) + ".json"
 
             employee_dict = []
