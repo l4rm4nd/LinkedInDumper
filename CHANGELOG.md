@@ -1,3 +1,10 @@
+## [0.3.6](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.5...v0.3.6) (2025-06-13)
+
+
+### Bug Fixes
+
+* stdout format and json filename ([74023f2](https://github.com/l4rm4nd/LinkedInDumper/commit/74023f28f03f05826b3da001a69db77db369cd74))
+
 ## [0.3.5](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.4...v0.3.5) (2025-06-03)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * error preventing data processing ([6532573](https://github.com/l4rm4nd/LinkedInDumper/commit/65325730de14ea6621d83245d952bf31c801c19d))
-
-## [0.3.1](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.0...v0.3.1) (2025-04-15)
-
-
-### Bug Fixes
-
-* remove ast imports ([f9ee8d2](https://github.com/l4rm4nd/LinkedInDumper/commit/f9ee8d2ebdcdb60a937158cf97835a2ed1bd9ad8))
 
