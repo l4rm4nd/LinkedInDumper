@@ -34,15 +34,6 @@ jobs:
           preset: "conventionalcommits"
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        with:
-          name: ${{ steps.changelog.outputs.tag }}
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   bandit:
     name: SAST with Bandit
     runs-on: ubuntu-latest
