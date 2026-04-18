@@ -1,3 +1,10 @@
+## [0.3.7](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.6...v0.3.7) (2026-04-18)
+
+
+### Bug Fixes
+
+* freeze libs and add semgrep + sbom scanning ([58913b5](https://github.com/l4rm4nd/LinkedInDumper/commit/58913b50349bfdc25b28724d5bf338e3f3b2bc13))
+
 ## [0.3.6](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.5...v0.3.6) (2025-06-13)
 
 
@@ -25,11 +32,4 @@
 ### Bug Fixes
 
 * remove unnecessary ast again ([a96586b](https://github.com/l4rm4nd/LinkedInDumper/commit/a96586b48363fda3055065ba559710d6756ec18c))
-
-## [0.3.2](https://github.com/l4rm4nd/LinkedInDumper/compare/v0.3.1...v0.3.2) (2025-04-30)
-
-
-### Bug Fixes
-
-* error preventing data processing ([6532573](https://github.com/l4rm4nd/LinkedInDumper/commit/65325730de14ea6621d83245d952bf31c801c19d))
 
