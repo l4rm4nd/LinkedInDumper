@@ -14,6 +14,16 @@
     <a href="https://www.buymeacoffee.com/LRVT" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 </div>
 
+## ⭐ Sponsors
+
+<img width="275" alt="SWIFTPROXY 1024 300" src="https://github.com/user-attachments/assets/78e5acd3-5d87-4ac5-b51e-2a5fc98f37d0" />
+
+This project is sponsered by [**Swiftproxy**](https://www.swiftproxy.net/)
+
+> Premium residential proxies for LinkedIn data collection, web scraping, and browser automation. Access 80M+ real residential IPs across 190+ countries with rotating and sticky sessions, non-expiring traffic, and support for HTTP, HTTPS, and SOCKS5.
+>
+> Free Trial Available. 10% OFF with code: PROXY90
+
 ## 💬 Description
 
 LinkedInDumper is a Python 3 script that dumps employee data from the LinkedIn social networking platform.
