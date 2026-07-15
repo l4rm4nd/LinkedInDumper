@@ -18,7 +18,7 @@
 
 <img width="275" alt="SWIFTPROXY 1024 300" src="https://github.com/user-attachments/assets/78e5acd3-5d87-4ac5-b51e-2a5fc98f37d0" />
 
-This project is sponsered by [**Swiftproxy**](https://www.swiftproxy.net/)
+This project is sponsered by [**Swiftproxy**](https://www.swiftproxy.net/?ref=LinkedInDumper)
 
 > Premium residential proxies for LinkedIn data collection, web scraping, and browser automation. Access 80M+ real residential IPs across 190+ countries with rotating and sticky sessions, non-expiring traffic, and support for HTTP, HTTPS, and SOCKS5.
 >
