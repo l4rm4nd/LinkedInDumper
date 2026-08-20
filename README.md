@@ -76,6 +76,16 @@ pip install -r requirements.txt
 python3 linkedindumper.py --url 'https://www.linkedin.com/company/apple' --cookie '<cookie>' --email-format '{0}.{1}@apple.de'
 ````
 
+### 🌍 Example 3 - Browser Dev Console
+
+1. Open LinkedIn and log in
+2. Open the LinkedIn company site with `/company/xxyy`
+3. Open developer console and paste the content of `console.js` in
+4. Define email format and provide email domain
+5. Press enter.
+
+Results printed in console and downloaded as CSV.
+
 ## 💎 Outputs
 
 The script will return employee data as semi-colon separated values (like CSV):
