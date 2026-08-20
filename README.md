@@ -80,9 +80,9 @@ python3 linkedindumper.py --url 'https://www.linkedin.com/company/apple' --cooki
 
 1. Open LinkedIn and log in
 2. Open the LinkedIn company site with `/company/xxyy`
-3. Open developer console and paste the content of `console.js` in
+3. Open developer console (CTRL+SHIFT+i), paste the content of `console.js` and press enter
 4. Define email format and provide email domain in JS popups
-5. Press enter or confirm to start
+5. Confirm to start
 
 Results printed in dev console and downloaded as CSV.
 
