@@ -86,6 +86,9 @@ python3 linkedindumper.py --url 'https://www.linkedin.com/company/apple' --cooki
 
 Results printed in dev console and downloaded as CSV.
 
+> [!TIP]
+> You can also prepend `javascript:` and save it as a browser bookmarklet.
+
 ## 💎 Outputs
 
 The script will return employee data as semi-colon separated values (like CSV):
